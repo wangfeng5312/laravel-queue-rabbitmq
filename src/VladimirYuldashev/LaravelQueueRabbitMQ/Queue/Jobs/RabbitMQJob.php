@@ -155,7 +155,21 @@ class RabbitMQJob extends Job implements JobContract
             $this->connection->push($job, $data, $this->getQueue());
         }
     }
-
+    
+    /**
+     * Release the job back into the queue.(not delete)
+     *
+     * @param int $delay
+     *
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function sequenceRelease()
+    {
+        $this->released = true;
+    }
+    
     /**
      * Sets the count of attempts at processing this job.
      *
